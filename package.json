@@ -1,0 +1,16 @@
+{
+  "name": "online-abc-qa-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "온라인 가나다 QA scraper | https://korean.go.kr/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "libra-0",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.1",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
