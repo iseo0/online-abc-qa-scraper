@@ -10,7 +10,7 @@ const choice = (arr) => {
 let qnaRes = {};
 let _proxy = choice(proxy).split(':');
 
-let page = 90; // 시작 페이지
+let page = 1; // 시작 페이지
 while(true) {
     let qnaList;
     try {
@@ -27,7 +27,7 @@ while(true) {
         break;
     }
 
-    for(let qna of qnaList) {
+    await Promise.all(qnaList.map(async (qna) => {
         while(true) {
             console.log(`Q&A ${qna['id']}|"${qna['title']}"의 내용을 불러옵니다.`);
             
@@ -39,16 +39,16 @@ while(true) {
                 console.log(`Q&A ${qna['id']}의 내용을 불러오지 못했습니다. 다시 시도합니다.`);
                 continue;
             }
-
+    
             if(Object.keys(content['answer']).length == 0) {
                 console.log(` ㄴQ&A ${qna['id']}|"${qna['title']}" 질문에 대한 답변이 없습니다`);
                 break; // 답변이 없는 경우 저장하지 않음
             }
-
+    
             qnaRes[qna['id']] = content;
             break;
-        }
-    }
+        }    
+    }));
 
     fs.writeFileSync('./qna.json', JSON.stringify(qnaRes), 'utf-8');
     console.log('')
